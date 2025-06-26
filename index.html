@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playlist Musical</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Minha Playlist Musical</h1>
+        
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Adicionar Música</h5>
+                <form id="form-adicionar-musica">
+                    <div class="mb-3">
+                        <label for="input-titulo" class="form-label">Título da Música</label>
+                        <input type="text" class="form-control" id="input-titulo" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="input-artista" class="form-label">Artista/Banda</label>
+                        <input type="text" class="form-control" id="input-artista" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Adicionar à Playlist</button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title d-flex justify-content-between align-items-center">
+                    Minhas Músicas
+                    <button id="botao-limpar" class="btn btn-outline-danger btn-sm">Limpar Playlist</button>
+                </h5>
+                <ul id="lista-playlist" class="list-group">
+                    <!-- As músicas serão inseridas aqui via JavaScript -->
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="playlist.js"></script>
+</body>
+</html>
