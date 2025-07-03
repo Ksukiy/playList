@@ -115,6 +115,7 @@ function atualizarListaPlaylist() {
             </button>
         `;
         
+        // Adiciona o evento de clique para remover a música
         li.querySelector('button').addEventListener('click', () => {
             removerMusica(musica.id);
         });
@@ -123,12 +124,12 @@ function atualizarListaPlaylist() {
     });
 }
 
-// Event Listeners
+// Adiciona o evento de submit ao formulário
 FORM_ADICIONAR.addEventListener('submit', function(e) {
     e.preventDefault();
     adicionarMusica(INPUT_TITULO.value, INPUT_ARTISTA.value, INPUT_ANO.value);
 });
-
+// Adiciona o evento de clique ao botão de limpar playlist
 BOTAO_LIMPAR.addEventListener('click', limparPlaylist);
 
 // Carrega a playlist ao iniciar
