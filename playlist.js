@@ -10,6 +10,7 @@ const INPUT_ARTISTA = document.getElementById('input-artista');
 const INPUT_ANO = document.getElementById('input-ano');
 const LISTA_PLAYLIST = document.getElementById('lista-playlist');
 const BOTAO_LIMPAR = document.getElementById('botao-limpar');
+const INPUT_GENERO = document.getElementById('input-genero');
 
 // Chave para localStorage
 const LOCAL_STORAGE_KEY = 'playlist_musical_com_ano';
@@ -39,7 +40,7 @@ function salvarPlaylist() {
 /**
  * Adiciona uma nova música à playlist
  */
-function adicionarMusica(titulo, artista, ano) {
+function adicionarMusica(titulo, artista, ano, genero) {
     if (!titulo.trim() || !artista.trim()) {
         alert('Por favor, preencha todos os campos obrigatórios!');
         return;
@@ -56,6 +57,7 @@ function adicionarMusica(titulo, artista, ano) {
         titulo: titulo,
         artista: artista,
         ano: ano || 'Desconhecido',
+        genero: genero || 'Desconhecido',
         dataAdicao: new Date().toLocaleDateString('pt-BR')
     };
     
@@ -67,6 +69,7 @@ function adicionarMusica(titulo, artista, ano) {
     INPUT_TITULO.value = '';
     INPUT_ARTISTA.value = '';
     INPUT_ANO.value = '';
+    INPUT_GENERO.value = '';
 }
 
 /**
@@ -108,7 +111,7 @@ function atualizarListaPlaylist() {
             <div class="musica-info">
                 <h5 class="mb-1">${musica.titulo}</h5>
                 <p class="mb-1">${musica.artista}</p>
-                <small class="text-muted">Ano: ${musica.ano} | Adicionado em: ${musica.dataAdicao}</small>
+                <small class="text-muted">Ano: ${musica.ano} | Gênero: ${musica.genero} | Adicionado em: ${musica.dataAdicao}</small>
             </div>
             <button class="btn btn-outline-danger btn-sm" data-id="${musica.id}">
                 <i class="bi bi-trash"></i>
@@ -127,7 +130,7 @@ function atualizarListaPlaylist() {
 // Adiciona o evento de submit ao formulário
 FORM_ADICIONAR.addEventListener('submit', function(e) {
     e.preventDefault();
-    adicionarMusica(INPUT_TITULO.value, INPUT_ARTISTA.value, INPUT_ANO.value);
+    adicionarMusica(INPUT_TITULO.value, INPUT_ARTISTA.value, INPUT_ANO.value, INPUT_GENERO.value);
 });
 // Adiciona o evento de clique ao botão de limpar playlist
 BOTAO_LIMPAR.addEventListener('click', limparPlaylist);
