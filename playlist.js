@@ -12,6 +12,10 @@ const LISTA_PLAYLIST = document.getElementById('lista-playlist');
 const BOTAO_LIMPAR = document.getElementById('botao-limpar');
 const INPUT_GENERO = document.getElementById('input-genero');
 
+let contadorCliques = 0;
+
+const CONTADOR_CLIQUES = document.getElementById('contador-cliques');
+
 // Chave para localStorage
 const LOCAL_STORAGE_KEY = 'playlist_musical_com_ano';
 
@@ -62,9 +66,13 @@ function adicionarMusica(titulo, artista, ano, genero) {
     };
     
     playlist.push(musica);
+    contadorCliques++;
+    CONTADOR_CLIQUES.textContent = `Músicas adicionadas: ${contadorCliques}`;
     salvarPlaylist();
     atualizarListaPlaylist();
-    
+
+    localStorage.setItem('contador_cliques', contadorCliques);
+
     // Limpa os campos do formulário
     INPUT_TITULO.value = '';
     INPUT_ARTISTA.value = '';
@@ -127,6 +135,26 @@ function atualizarListaPlaylist() {
     });
 }
 
+const BOTAO_TEMA = document.getElementById('botao-tema');
+
+// Alternar entre modo claro e escuro
+BOTAO_TEMA.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+
+    // Salvar preferência no localStorage
+    const modoAtual = document.body.classList.contains('dark-mode') ? 'escuro' : 'claro';
+    localStorage.setItem('modo_tema', modoAtual);
+});
+
+// Aplicar tema salvo ao carregar a página
+document.addEventListener('DOMContentLoaded', () => {
+    const temaSalvo = localStorage.getItem('modo_tema');
+    if (temaSalvo === 'escuro') {
+        document.body.classList.add('dark-mode');
+    }
+});
+
+
 // Adiciona o evento de submit ao formulário
 FORM_ADICIONAR.addEventListener('submit', function(e) {
     e.preventDefault();
@@ -137,3 +165,9 @@ BOTAO_LIMPAR.addEventListener('click', limparPlaylist);
 
 // Carrega a playlist ao iniciar
 document.addEventListener('DOMContentLoaded', carregarPlaylist);
+// Recupera o contador de cliques do localStorage
+const contadorSalvo = localStorage.getItem('contador_cliques');
+if (contadorSalvo) {
+    contadorCliques = parseInt(contadorSalvo);
+    CONTADOR_CLIQUES.textContent = `Músicas adicionadas: ${contadorCliques}`;
+}
