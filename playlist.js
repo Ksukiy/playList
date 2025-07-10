@@ -16,6 +16,10 @@ let contadorCliques = 0;
 
 const CONTADOR_CLIQUES = document.getElementById('contador-cliques');
 
+let removedorMusicas = 0;
+
+const REMOVEDOR_MUSICAS = document.getElementById('removedor-musicas')
+
 // Chave para localStorage
 const LOCAL_STORAGE_KEY = 'playlist_musical_com_ano';
 
@@ -94,6 +98,8 @@ function removerMusica(id) {
  */
 function limparPlaylist() {
     if (confirm('Tem certeza que deseja limpar toda a playlist?')) {
+        contadorCliques = 0;
+        CONTADOR_CLIQUES.textContent =  `Músicas adicionadas: ${contadorCliques}`;
         playlist = [];
         localStorage.removeItem(LOCAL_STORAGE_KEY);
         atualizarListaPlaylist();
@@ -116,6 +122,7 @@ function atualizarListaPlaylist() {
         li.className = 'list-group-item d-flex justify-content-between align-items-center playlist-item';
         
         li.innerHTML = `
+
             <div class="musica-info">
                 <h5 class="mb-1">${musica.titulo}</h5>
                 <p class="mb-1">${musica.artista}</p>
@@ -128,6 +135,8 @@ function atualizarListaPlaylist() {
         
         // Adiciona o evento de clique para remover a música
         li.querySelector('button').addEventListener('click', () => {
+            contadorCliques--;
+            CONTADOR_CLIQUES.textContent =  `Músicas adicionadas: ${contadorCliques}`;
             removerMusica(musica.id);
         });
         
